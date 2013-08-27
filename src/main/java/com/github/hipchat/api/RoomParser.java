@@ -24,15 +24,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.JsonToken;
-import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
 public class RoomParser
 {
-    public static List<Room> parseRoomList(HipChat origin, InputStream input) throws JsonParseException, JsonMappingException, IOException
+    public static List<Room> parseRoomList(HipChat origin, InputStream input) throws IOException
     {
         JsonParser jp = HipChat.JSON_FACTORY.createJsonParser(input);
         ObjectMapper mapper = new ObjectMapper();
@@ -69,7 +67,7 @@ public class RoomParser
 
     }
 
-    public static Room parseRoom(HipChat origin, InputStream input) throws JsonParseException, JsonMappingException, IOException
+    public static Room parseRoom(HipChat origin, InputStream input) throws IOException
     {
         JsonParser jp = HipChat.JSON_FACTORY.createJsonParser(input);
         ObjectMapper mapper = new ObjectMapper();
@@ -90,7 +88,7 @@ public class RoomParser
 
     }
 
-    private static Room parseRoom(HipChat origin, ObjectMapper mapper, JsonParser jp) throws JsonParseException, JsonMappingException, IOException
+    private static Room parseRoom(HipChat origin, ObjectMapper mapper, JsonParser jp) throws IOException
     {
         Room result = null;
 
