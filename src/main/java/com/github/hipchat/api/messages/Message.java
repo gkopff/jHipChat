@@ -28,9 +28,9 @@ public interface Message
         YELLOW, RED, GREEN, PURPLE, RANDOM;
     }
 
-    public UserId getSender();
+    UserId getSender();
 
-    public String getText();
+    String getText();
 
-    public Room getRoom();
+    Room getRoom();
 }
