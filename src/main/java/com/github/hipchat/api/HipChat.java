@@ -57,14 +57,10 @@ public class HipChat {
 		HttpURLConnection connection = null;
 
 		try {
-			URL requestUrl = new URL(HipChatConstants.API_BASE + HipChatConstants.ROOMS_LIST + query);
-			connection = (HttpURLConnection) requestUrl.openConnection();
-			connection.setDoInput(true);
+			URL requestUrl = getRequestUrl(HipChatConstants.API_BASE, HipChatConstants.ROOMS_LIST, query);
+			connection = getGetConnection(requestUrl);
 			input = connection.getInputStream();
 			results = RoomParser.parseRoomList(this, input);
-		}
-		catch (MalformedURLException e) {
-			LogMF.error(logger, "Malformed URL Exception: {0}", new Object[]{ e.getMessage() });
 		}
 		catch (IOException e) {
 			LogMF.error(logger, "IO Exception: {0}", new Object[]{ e.getMessage() });
@@ -119,21 +115,14 @@ public class HipChat {
 		HttpURLConnection connection = null;
 
 		try {
-			URL requestUrl = new URL(HipChatConstants.API_BASE + HipChatConstants.ROOMS_CREATE + query);
-			connection = (HttpURLConnection) requestUrl.openConnection();
-			connection.setDoOutput(true);
-
-			connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-			connection.setRequestProperty("Content-Length", Integer.toString(paramsToSend.getBytes().length));
-			connection.setRequestProperty("Content-Language", "en-US");
-
+			URL requestUrl = getRequestUrl(HipChatConstants.API_BASE, HipChatConstants.ROOMS_CREATE, query);
+			connection = getPostConnection(requestUrl, paramsToSend);
 			output = new BufferedOutputStream(connection.getOutputStream());
 			IOUtils.write(paramsToSend, output);
 			IOUtils.closeQuietly(output);
 
 			input = connection.getInputStream();
 			result = RoomParser.parseRoom(this, input);
-
 		}
 		finally {
 			IOUtils.closeQuietly(input);
@@ -159,29 +148,18 @@ public class HipChat {
 
 		OutputStream output = null;
 		InputStream input = null;
-
 		HttpURLConnection connection = null;
 		boolean result = false;
 
 		try {
-			URL requestUrl = new URL(HipChatConstants.API_BASE + HipChatConstants.ROOMS_DELETE + query);
-			connection = (HttpURLConnection) requestUrl.openConnection();
-			connection.setDoOutput(true);
-
-			connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-			connection.setRequestProperty("Content-Length", Integer.toString(paramsToSend.getBytes().length));
-			connection.setRequestProperty("Content-Language", "en-US");
-
+			URL requestUrl = getRequestUrl(HipChatConstants.API_BASE, HipChatConstants.ROOMS_DELETE, query);
+			connection = getPostConnection(requestUrl, paramsToSend);
 			output = new BufferedOutputStream(connection.getOutputStream());
 			IOUtils.write(paramsToSend, output);
 			IOUtils.closeQuietly(output);
 
 			input = connection.getInputStream();
 			result = UtilParser.parseDeleteResult(input);
-
-		}
-		catch (MalformedURLException e) {
-			LogMF.error(logger, "Malformed URL Exception: {0}", new Object[]{ e.getMessage() });
 		}
 		catch (IOException e) {
 			LogMF.error(logger, "IO Exception: {0}", new Object[]{ e.getMessage() });
@@ -202,18 +180,13 @@ public class HipChat {
 		HttpURLConnection connection = null;
 
 		try {
-			URL requestUrl = new URL(HipChatConstants.API_BASE + HipChatConstants.ROOMS_SHOW + query);
-			connection = (HttpURLConnection) requestUrl.openConnection();
-			connection.setDoInput(true);
+			URL requestUrl = getRequestUrl(HipChatConstants.API_BASE, HipChatConstants.ROOMS_SHOW, query);
+			connection = getGetConnection(requestUrl);
 			input = connection.getInputStream();
 			result = RoomParser.parseRoom(this, input);
-
-		}
-		catch (MalformedURLException e) {
-			e.printStackTrace();
 		}
 		catch (IOException e) {
-			e.printStackTrace();
+			LogMF.error(logger, "IO Exception: {0}", new Object[]{ e.getMessage() });
 		}
 		finally {
 			IOUtils.closeQuietly(input);
@@ -286,14 +259,8 @@ public class HipChat {
 		User result = null;
 
 		try {
-			URL requestUrl = new URL(HipChatConstants.API_BASE + HipChatConstants.USERS_CREATE + query);
-			connection = (HttpURLConnection) requestUrl.openConnection();
-			connection.setDoOutput(true);
-
-			connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-			connection.setRequestProperty("Content-Length", Integer.toString(paramsToSend.getBytes().length));
-			connection.setRequestProperty("Content-Language", "en-US");
-
+			URL requestUrl = getRequestUrl(HipChatConstants.API_BASE, HipChatConstants.USERS_CREATE, query);
+			connection = getPostConnection(requestUrl, paramsToSend);
 			output = new BufferedOutputStream(connection.getOutputStream());
 			IOUtils.write(paramsToSend, output);
 			IOUtils.closeQuietly(output);
@@ -301,9 +268,6 @@ public class HipChat {
 			input = connection.getInputStream();
 			result = UserParser.parseUser(this, input);
 
-		}
-		catch (MalformedURLException e) {
-			LogMF.error(logger, "Malformed URL Exception: {0}", new Object[]{ e.getMessage() });
 		}
 		catch (IOException e) {
 			LogMF.error(logger, "IO Exception: {0}", new Object[]{ e.getMessage() });
@@ -379,14 +343,8 @@ public class HipChat {
 		User result = null;
 
 		try {
-			URL requestUrl = new URL(HipChatConstants.API_BASE + HipChatConstants.USERS_UPDATE + query);
-			connection = (HttpURLConnection) requestUrl.openConnection();
-			connection.setDoOutput(true);
-
-			connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-			connection.setRequestProperty("Content-Length", Integer.toString(paramsToSend.getBytes().length));
-			connection.setRequestProperty("Content-Language", "en-US");
-
+			URL requestUrl = getRequestUrl(HipChatConstants.API_BASE, HipChatConstants.USERS_UPDATE, query);
+			connection = getPostConnection(requestUrl, paramsToSend);
 			output = new BufferedOutputStream(connection.getOutputStream());
 			IOUtils.write(paramsToSend, output);
 			IOUtils.closeQuietly(output);
@@ -394,9 +352,6 @@ public class HipChat {
 			input = connection.getInputStream();
 			result = UserParser.parseUser(this, input);
 
-		}
-		catch (MalformedURLException e) {
-			LogMF.error(logger, "Malformed URL Exception: {0}", new Object[]{ e.getMessage() });
 		}
 		catch (IOException e) {
 			LogMF.error(logger, "IO Exception: {0}", new Object[]{ e.getMessage() });
@@ -430,24 +385,14 @@ public class HipChat {
 		boolean result = false;
 
 		try {
-			URL requestUrl = new URL(HipChatConstants.API_BASE + HipChatConstants.USERS_DELETE + query);
-			connection = (HttpURLConnection) requestUrl.openConnection();
-			connection.setDoOutput(true);
-
-			connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-			connection.setRequestProperty("Content-Length", Integer.toString(paramsToSend.getBytes().length));
-			connection.setRequestProperty("Content-Language", "en-US");
-
+			URL requestUrl = getRequestUrl(HipChatConstants.API_BASE, HipChatConstants.USERS_DELETE, query);
+			connection = getPostConnection(requestUrl, paramsToSend);
 			output = new BufferedOutputStream(connection.getOutputStream());
 			IOUtils.write(paramsToSend, output);
 			IOUtils.closeQuietly(output);
 
 			input = connection.getInputStream();
 			result = UtilParser.parseDeleteResult(input);
-
-		}
-		catch (MalformedURLException e) {
-			LogMF.error(logger, "Malformed URL Exception: {0}", new Object[]{ e.getMessage() });
 		}
 		catch (IOException e) {
 			LogMF.error(logger, "IO Exception: {0}", new Object[]{ e.getMessage() });
@@ -468,15 +413,10 @@ public class HipChat {
 		HttpURLConnection connection = null;
 
 		try	{
-			URL requestUrl = new URL(HipChatConstants.API_BASE + HipChatConstants.USERS_LIST + query);
-			connection = (HttpURLConnection) requestUrl.openConnection();
-			connection.setDoInput(true);
+			URL requestUrl = getRequestUrl(HipChatConstants.API_BASE, HipChatConstants.USERS_LIST, query);
+			connection = getGetConnection(requestUrl);
 			input = connection.getInputStream();
 			results = UserParser.parseUserList(this, input);
-
-		}
-		catch (MalformedURLException e) {
-			LogMF.error(logger, "Malformed URL Exception: {0}", new Object[]{ e.getMessage() });
 		}
 		catch (IOException e) {
 			LogMF.error(logger, "IO Exception: {0}", new Object[]{ e.getMessage() });
@@ -497,14 +437,10 @@ public class HipChat {
 		HttpURLConnection connection = null;
 
 		try {
-			URL requestUrl = new URL(HipChatConstants.API_BASE + HipChatConstants.USERS_SHOW + query);
-			connection = (HttpURLConnection) requestUrl.openConnection();
-			connection.setDoInput(true);
+			URL requestUrl = getRequestUrl(HipChatConstants.API_BASE, HipChatConstants.USERS_SHOW, query);
+			connection = getGetConnection(requestUrl);
 			input = connection.getInputStream();
 			result = UserParser.parseUser(this, input);
-		}
-		catch (MalformedURLException e) {
-			LogMF.error(logger, "Malformed URL Exception: {0}", new Object[]{ e.getMessage() });
 		}
 		catch (IOException e) {
 			LogMF.error(logger, "IO Exception: {0}", new Object[]{ e.getMessage() });
@@ -515,5 +451,44 @@ public class HipChat {
 		}
 
 		return result;
+	}
+	
+	private URL getRequestUrl(String base, String command, String query) {
+		URL url = null;
+		try {
+			url = new URL(base + command + query); 
+		}
+		catch (MalformedURLException e) {
+			LogMF.error(logger, "Malformed URL Exception: {0}", new Object[]{ e.getMessage() });
+		}
+		return url;
+	}
+	
+	private HttpURLConnection getPostConnection(URL requestUrl, String paramsToSend) {
+		HttpURLConnection connection = null;
+		try {
+			connection = (HttpURLConnection) requestUrl.openConnection();
+			connection.setDoOutput(true);
+			
+			connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+			connection.setRequestProperty("Content-Length", Integer.toString(paramsToSend.getBytes().length));
+			connection.setRequestProperty("Content-Language", "en-US");
+		}
+		catch (IOException e) {
+			LogMF.error(logger, "IO Exception: {0}", new Object[]{ e.getMessage() });
+		}
+		return connection;
+	}
+	
+	private HttpURLConnection getGetConnection(URL requestUrl) {
+		HttpURLConnection connection = null;
+		try {
+			connection = (HttpURLConnection) requestUrl.openConnection();
+			connection.setDoInput(true);
+		}
+		catch (IOException e) {
+			LogMF.error(logger, "IO Exception: {0}", new Object[]{ e.getMessage() });
+		}
+		return connection;
 	}
 }
