@@ -18,42 +18,41 @@
 
 package com.github.hipchat.api;
 
-public interface HipChatConstants
-{
-     String JSON_FORMAT = "json";
-     String API_BASE = "https://api.hipchat.com/v1/";
+public interface HipChatConstants {
+	String JSON_FORMAT = "json";
+	String API_BASE = "https://api.hipchat.com/v1/";
 
-    // API Operation URL components
-     String ROOMS_LIST = "rooms/list";
-     String ROOMS_LIST_QUERY_FORMAT = "?format=%s&auth_token=%s";
+	// API Operation URL components
+	String ROOMS_LIST = "rooms/list";
+	String ROOMS_LIST_QUERY_FORMAT = "?format=%s&auth_token=%s";
 
-     String ROOMS_CREATE = "rooms/create";
-     String ROOMS_CREATE_QUERY_FORMAT = "?format=%s&auth_token=%s";
+	String ROOMS_CREATE = "rooms/create";
+	String ROOMS_CREATE_QUERY_FORMAT = "?format=%s&auth_token=%s";
 
-     String ROOMS_DELETE = "rooms/delete";
-     String ROOMS_DELETE_QUERY_FORMAT = "?format=%s&auth_token=%s";
+	String ROOMS_DELETE = "rooms/delete";
+	String ROOMS_DELETE_QUERY_FORMAT = "?format=%s&auth_token=%s";
 
-     String ROOMS_SHOW = "rooms/show";
-     String ROOMS_SHOW_QUERY_FORMAT = "?room_id=%s&format=%s&auth_token=%s";
+	String ROOMS_SHOW = "rooms/show";
+	String ROOMS_SHOW_QUERY_FORMAT = "?room_id=%s&format=%s&auth_token=%s";
 
-     String ROOMS_HISTORY = "rooms/history";
-     String ROOMS_HISTORY_QUERY_FORMAT = "?room_id=%s&date=%s&timezone=%s&format=%s&auth_token=%s";
+	String ROOMS_HISTORY = "rooms/history";
+	String ROOMS_HISTORY_QUERY_FORMAT = "?room_id=%s&date=%s&timezone=%s&format=%s&auth_token=%s";
 
-     String ROOMS_MESSAGE = "rooms/message";
-     String ROOMS_MESSAGE_QUERY_FORMAT = "?format=%s&auth_token=%s";
+	String ROOMS_MESSAGE = "rooms/message";
+	String ROOMS_MESSAGE_QUERY_FORMAT = "?format=%s&auth_token=%s";
 
-     String USERS_CREATE = "users/create";
-     String USERS_CREATE_QUERY_FORMAT = "?format=%s&auth_token=%s";
+	String USERS_CREATE = "users/create";
+	String USERS_CREATE_QUERY_FORMAT = "?format=%s&auth_token=%s";
 
-     String USERS_DELETE = "users/delete";
-     String USERS_DELETE_QUERY_FORMAT = "?format=%s&auth_token=%s";
+	String USERS_DELETE = "users/delete";
+	String USERS_DELETE_QUERY_FORMAT = "?format=%s&auth_token=%s";
 
-     String USERS_LIST = "users/list";
-     String USERS_LIST_QUERY_FORMAT = "?format=%s&auth_token=%s";
+	String USERS_LIST = "users/list";
+	String USERS_LIST_QUERY_FORMAT = "?format=%s&auth_token=%s";
 
-     String USERS_SHOW = "users/show";
-     String USERS_SHOW_QUERY_FORMAT = "?user_id=%s&format=%s&auth_token=%s";
+	String USERS_SHOW = "users/show";
+	String USERS_SHOW_QUERY_FORMAT = "?user_id=%s&format=%s&auth_token=%s";
 
-     String USERS_UPDATE = "users/update";
-     String USERS_UPDATE_QUERY_FORMAT = "?format=%s&auth_token=%s";
+	String USERS_UPDATE = "users/update";
+	String USERS_UPDATE_QUERY_FORMAT = "?format=%s&auth_token=%s";
 }
