@@ -66,3 +66,11 @@ target/
 
 *.xlsx
 *.xls
+
+##################################
+# intellij gitignore from github #
+##################################
+*.iml
+*.ipr
+*.iws
+.idea/
