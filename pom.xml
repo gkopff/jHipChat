@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.github.hipchat</groupId>
   <artifactId>jHipchat</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.1</version>
   <name>jHipChat</name>
   <description>A Java implementation of the Hipchat API.</description>
   <url>https://github.com/ATNI/jHipChat</url>
@@ -13,7 +13,7 @@
 
   <scm>
     <developerConnection>scm:git:https://github.com/ATNI/jHipChat.git</developerConnection>
-    <tag>HEAD</tag>
+    <tag>jHipchat-0.0.1</tag>
   </scm>
 
   <build>
