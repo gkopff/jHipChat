@@ -18,6 +18,9 @@
 
 package com.github.hipchat.api;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,13 +32,10 @@ import java.util.List;
 import java.util.TimeZone;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.log4j.LogMF;
-import org.apache.log4j.Logger;
 import org.codehaus.jackson.JsonFactory;
-
 public class HipChat {
 
-	private static Logger logger = Logger.getLogger(HipChat.class);
+	private static Logger logger = LoggerFactory.getLogger(HipChat.class);
 
 	public static final JsonFactory JSON_FACTORY = new JsonFactory();
 
@@ -63,7 +63,7 @@ public class HipChat {
 			results = RoomParser.parseRoomList(this, input);
 		}
 		catch (IOException e) {
-			LogMF.error(logger, "IO Exception: {0}", new Object[]{ e.getMessage() });
+			logger.error("IO Exception: {}", e.getMessage());
 		}
 		finally {
 			IOUtils.closeQuietly(input);
@@ -162,7 +162,7 @@ public class HipChat {
 			result = UtilParser.parseDeleteResult(input);
 		}
 		catch (IOException e) {
-			LogMF.error(logger, "IO Exception: {0}", new Object[]{ e.getMessage() });
+			logger.error("IO Exception: {}", e.getMessage());
 		}
 		finally {
 			IOUtils.closeQuietly(input);
@@ -186,7 +186,7 @@ public class HipChat {
 			result = RoomParser.parseRoom(this, input);
 		}
 		catch (IOException e) {
-			LogMF.error(logger, "IO Exception: {0}", new Object[]{ e.getMessage() });
+			logger.error("IO Exception: {}", e.getMessage());
 		}
 		finally {
 			IOUtils.closeQuietly(input);
@@ -270,7 +270,7 @@ public class HipChat {
 
 		}
 		catch (IOException e) {
-			LogMF.error(logger, "IO Exception: {0}", new Object[]{ e.getMessage() });
+			logger.error("IO Exception: {}", e.getMessage());
 		}
 		finally {
 			IOUtils.closeQuietly(input);
@@ -354,7 +354,7 @@ public class HipChat {
 
 		}
 		catch (IOException e) {
-			LogMF.error(logger, "IO Exception: {0}", new Object[]{ e.getMessage() });
+			logger.error("IO Exception: {}", e.getMessage());
 		}
 		finally {
 			IOUtils.closeQuietly(input);
@@ -395,7 +395,7 @@ public class HipChat {
 			result = UtilParser.parseDeleteResult(input);
 		}
 		catch (IOException e) {
-			LogMF.error(logger, "IO Exception: {0}", new Object[]{ e.getMessage() });
+			logger.error("IO Exception: {}", e.getMessage());
 		}
 		finally {
 			IOUtils.closeQuietly(input);
@@ -419,7 +419,7 @@ public class HipChat {
 			results = UserParser.parseUserList(this, input);
 		}
 		catch (IOException e) {
-			LogMF.error(logger, "IO Exception: {0}", new Object[]{ e.getMessage() });
+			logger.error("IO Exception: {}", e.getMessage());
 		}
 		finally {
 			IOUtils.closeQuietly(input);
@@ -443,7 +443,7 @@ public class HipChat {
 			result = UserParser.parseUser(this, input);
 		}
 		catch (IOException e) {
-			LogMF.error(logger, "IO Exception: {0}", new Object[]{ e.getMessage() });
+			logger.error("IO Exception: {}", e.getMessage());
 		}
 		finally {
 			IOUtils.closeQuietly(input);
@@ -459,7 +459,7 @@ public class HipChat {
 			url = new URL(base + command + query); 
 		}
 		catch (MalformedURLException e) {
-			LogMF.error(logger, "Malformed URL Exception: {0}", new Object[]{ e.getMessage() });
+			logger.error("IO Exception: {}", e.getMessage());
 		}
 		return url;
 	}
@@ -475,7 +475,7 @@ public class HipChat {
 			connection.setRequestProperty("Content-Language", "en-US");
 		}
 		catch (IOException e) {
-			LogMF.error(logger, "IO Exception: {0}", new Object[]{ e.getMessage() });
+			logger.error("IO Exception: {}", e.getMessage());
 		}
 		return connection;
 	}
@@ -487,7 +487,7 @@ public class HipChat {
 			connection.setDoInput(true);
 		}
 		catch (IOException e) {
-			LogMF.error(logger, "IO Exception: {0}", new Object[]{ e.getMessage() });
+			logger.error("IO Exception: {}", e.getMessage());
 		}
 		return connection;
 	}
